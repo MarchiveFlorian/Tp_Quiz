@@ -11,16 +11,16 @@
 
     <p th:text=" ' Quelle est la capitale du pays : ' + ${pays.name} + ' ?'"></p>
 
-    <form method="POST" action="quiz">
+    <form method="POST" action="reponse">
         <div th:each=" c:${capitales}">
-        <input th:value="${c}"  type="radio" class="" th:id="${c}" name="capitale" >
+        <input th:value="${c}"  type="radio" th:id="${c}" name="capitale" >
         <label th:text="${c}" th:for="${c}"></label>
         </div>
 
-
-
+        <button type="submit">Valider votre réponse</button>
     </form>
 
+    <p th:text=" 'Votre score est de : ' + ${compteur}"></p>
 
 
 </body>

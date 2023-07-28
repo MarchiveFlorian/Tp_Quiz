@@ -20,6 +20,9 @@ public class CountryService {
     CountryRepository countryRepository;
 
     Random random = new Random();
+    public Integer compteur = 0;
+    Country randomCountry;
+    
 
     // get all
     public List<Country> getAllCountries() {
@@ -35,7 +38,12 @@ public class CountryService {
     public Country getRandomCountry(){
         List<Country> allCountries = countryRepository.findAll();
         int randomIndex = random.nextInt(allCountries.size());
-        Country randomCountry = allCountries.get(randomIndex);  
+        randomCountry = allCountries.get(randomIndex);  
+        return randomCountry;
+    }
+
+    //Get random country stored
+    public Country getStoredCountry(){
         return randomCountry;
     }
 
@@ -63,5 +71,19 @@ public class CountryService {
 
         System.out.println(randomCountry.getName() + " " + randomCountry.getCapital());
         return randomCapitals;
+    }
+
+    public Boolean validationReponse(String capital, Country randomCountry){
+        if(randomCountry.getCapital().equals(capital)){
+            compteur++;
+        }
+        else{
+            compteur--;
+        }
+        return randomCountry.getCapital().equals(capital);
+    }
+
+    public Integer getCompteur(){
+        return compteur;
     }
 } 
