@@ -1,8 +1,10 @@
 package com.example.quizz.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,7 @@ public class CountryService {
     @Autowired
     CountryRepository countryRepository;
 
-    Random random;
+    Random random = new Random();
 
     // get all
     public List<Country> getAllCountries() {
@@ -29,10 +31,32 @@ public class CountryService {
         return countryRepository.findById(id);
     }
 
-    // get randomCountry
-    public Country getOneRandomCountry(){
+    //Get country and capitals
+    public List<String> getCountryAndCapitals(){
+
+        //recupere pays
         List<Country> allCountries = countryRepository.findAll();
         int randomIndex = random.nextInt(allCountries.size());
-        return allCountries.get(randomIndex);
+        Country randomCountry = allCountries.get(randomIndex);
+
+        //on recup sa capitale
+        String countryCapital = randomCountry.getCapital();
+
+        //On enleve de la liste l'index du pays sélectionné
+        allCountries.remove(randomCountry);
+
+        //recupere 3 random capitales
+        List<String> allCapitals = allCountries.stream().map(Country::getCapital).collect(Collectors.toList());
+        Collections.shuffle(allCapitals);
+        List<String> randomCapitals = allCapitals.subList(0, 3);
+
+        //Ajouter la capitale du pays séléctionné à la liste des capitales aléatoires
+        randomCapitals.add(countryCapital);
+
+        // Mélanger la liste de toutes les capitales pour rendre l'ordre aléatoire
+        Collections.shuffle(randomCapitals);
+
+        System.out.println(randomCountry.getName() + " " + randomCountry.getCapital());
+        return randomCapitals;
     }
-}
+} 

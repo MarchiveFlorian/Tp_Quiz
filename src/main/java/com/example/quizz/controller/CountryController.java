@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.quizz.dao.CountryRepository;
 import com.example.quizz.entity.Country;
 import com.example.quizz.service.CountryService;
 
@@ -20,6 +21,9 @@ public class CountryController {
     // Injection
     @Autowired
     CountryService countryService;
+
+    @Autowired
+    CountryRepository countryRepository;
 
     // Méthode GET ALL
     @GetMapping("countries")
@@ -41,9 +45,10 @@ public class CountryController {
     }
 
     // On créer la question
-  /*   @GetMapping("/random-item")
-    public ResponseEntity<Item> getRandomItem() {
-        Item randomItem = randomItemService.getRandomItem();
-        return ResponseEntity.ok(randomItem);
-    }*/
+    @GetMapping("/quiz")
+    public List<String> getRandomCountryAndCapitals() {
+
+        List<String> quiz = countryService.getCountryAndCapitals();
+        return quiz;
+    }
 }
