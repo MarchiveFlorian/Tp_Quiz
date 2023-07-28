@@ -31,13 +31,18 @@ public class CountryService {
         return countryRepository.findById(id);
     }
 
-    //Get country and capitals
-    public List<String> getCountryAndCapitals(){
-
-        //recupere pays
+    //Get random country
+    public Country getRandomCountry(){
         List<Country> allCountries = countryRepository.findAll();
         int randomIndex = random.nextInt(allCountries.size());
-        Country randomCountry = allCountries.get(randomIndex);
+        Country randomCountry = allCountries.get(randomIndex);  
+        return randomCountry;
+    }
+
+    //Get random capitals
+    public List<String> getRandomCapitals(Country randomCountry){
+
+        List<Country> allCountries = countryRepository.findAll();
 
         //on recup sa capitale
         String countryCapital = randomCountry.getCapital();

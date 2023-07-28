@@ -46,9 +46,10 @@ public class CountryController {
 
     // On créer la question
     @GetMapping("/quiz")
-    public List<String> getRandomCountryAndCapitals() {
+    public List<String> getQuiz() {
 
-        List<String> quiz = countryService.getCountryAndCapitals();
-        return quiz;
+        Country randomCountry = countryService.getRandomCountry();
+        List<String> randomCapitals = countryService.getRandomCapitals(randomCountry);
+        return randomCapitals;
     }
 }

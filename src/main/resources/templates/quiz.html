@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+<body>
+
+    <h1>Quiz</h1>
+
+    <p th:text=" ' Quelle est la capitale du pays : ' + ${pays.name} + ' ?'"></p>
+
+    <form method="POST" action="quiz">
+        <div th:each=" c:${capitales}">
+        <input th:value="${c}"  type="radio" class="" th:id="${c}" name="capitale" >
+        <label th:text="${c}" th:for="${c}"></label>
+        </div>
+
+
+
+    </form>
+
+
+
+</body>
+</html>
